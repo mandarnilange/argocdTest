@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name:  ngnix-sample-app
+  namespace: default
+  labels:
+    app:  ngnix-sample-app
+spec:
+  selector:
+    matchLabels:
+      app: ngnix-sample-app
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app:  ngnix-sample-app
+    spec:
+      containers:
+      - name:  ngnix-sample-app
+        image:  nginx 
